@@ -1,0 +1,170 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+*,
+*:before,
+*:after {
+box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ol,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+margin: 0;
+font-family: 'Raleway', sans-serif;
+font-weight: 300;
+}
+
+body {
+scroll-behavior: smooth;
+line-height: 1.5;
+background-color: #FFF;
+}
+
+/* padding around the container with rows and columns */
+main {
+padding-top: 2rem;
+padding-bottom: 6rem;
+}
+
+/* container with columns and rows */
+.responsive-container {
+max-width: 1080px;
+width: 90%;
+margin-left: auto;
+margin-right: auto;
+}
+
+/* container with columns and rows */
+.grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 8rem;
+}
+
+/* container with columns */
+.grid-column {
+display: flex;
+flex-direction: column;
+}
+
+.product {
+padding-bottom: 9em;
+text-decoration: none;
+/* font-weight: 400;	i dont know what you are */
+transition: .15s ease;
+overflow: hidden;
+}
+
+/* image of the artwork */
+img {
+max-width: 100%;
+}
+
+
+
+a {
+color: inherit;
+}
+
+/* conatiner containing information about the artwork */
+.product-content {
+padding-top: 0.75rem;
+border-radius: 0 0 0.25rem 0.25rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+transition: .15s ease;
+background-color: #FFF;
+}
+
+/* text information about the artwork */
+.product-info {
+display: flex;
+flex-direction: column;
+}
+
+/* hover state of the information about the artwork */
+.product-info:hover {
+color: rgb(211, 190, 5);
+}
+
+/* title of the artwork */
+.product-title {
+font-size: 1.1rem;
+letter-spacing: 0.07rem;
+line-height: 1.25;
+padding-bottom: 1rem;
+
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  display: none;
+}
+
+
+
+/* hover animation */
+.hover-underline-animation {
+  display: inline-block;
+  position: relative;
+}
+
+.hover-underline-animation:after {
+  content: '';
+  position: absolute;
+  width: 300%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: #000000;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+
+
+
+
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+/* @media screen and (max-width: 800px) {
+  .grid-column {
+    flex: 100%;
+    max-width: 100%;
+  }
+
+  .product {
+    flex: 100%;
+    max-width: 100%;
+  }
+} */
+
+/* responsive for phone */
+/* @media all and (max-width: 415px) {
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+}
+} */

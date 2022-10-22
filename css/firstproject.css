@@ -1,0 +1,102 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+*,
+*:before,
+*:after {
+box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ol,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+margin: 0;
+font-family: 'Raleway', sans-serif;
+font-size: 1.15em;
+font-weight: 300;
+}
+
+h1{
+  margin: 0 0 1.375em;
+  font-weight: 400;
+}
+
+.everything{
+  overflow: hidden;
+  padding-top: 7em;
+}
+
+#content-container{
+  padding: 0 3em;
+}
+
+.single-project-info{
+  padding-top: 2.9em;
+}
+
+.single-project-info, .project-intro, .project-image-container, .project-image-wrapper img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding-bottom: 1em;
+}
+
+.row{
+  margin-left: -16px;
+  margin-right: -16px;
+}
+
+.col-sm-5 .col-sm-6, .col-sm-11, .col-sm-12, .col-sm-offset-1{
+position: relative;
+min-height: 1px;
+padding-left: 16px;
+padding-right: 16px;
+}
+
+.col-sm-5{
+  float: left;
+}
+
+.project-info{
+  margin-bottom: 3em;
+}
+
+p{
+display: block;
+margin: 0 0 1.375em;
+}
+
+.fact-row {
+  margin-left: 40%;
+}
+
+@media (min-width: 768px){
+  .col-sm-5 {
+    width: 45%;
+  }
+}
+
+@media (min-width: 768px){
+  .col-sm-5 .col-sm-6 .col-sm-11 {
+    float: left;
+  }
+}
+
+/* @media (min-width: 768px){
+  .col-sm-offset-1 {
+  margin-left: 8.333333333333332%;  }
+} */

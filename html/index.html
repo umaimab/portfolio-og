@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Your page title here :)</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="css/skeleton.css" />
+  
+
+    <!-- JS you need to make these folders
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/fabric.min.js"></script>
+  <script src="js/fabricControl.js"></script>
+
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/test.png">
+
+
+
+
+</head>
+<body>
+
+
+
+
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+ <!-- Menu -->
+ <div class="topnav">
+  <a class="active" href="/about">ABOUT</a>
+  <a href="/projects" class="split">PROJECTS</a>
+</div>
+
+
+<div style="padding-left:16px">
+  <h2>Split Navigation Example</h2>
+  <p>The "Help" link in the navigation bar is separated from the rest of the navigation links, resulting in a "split navigation" layout.</p>
+</div>
+
+  
+<div class="fabric-canvas-wrapper image-stack-box">
+  <canvas id="canvas" width="1440" height="760"></canvas>
+</div>
+
+
+<!-- script -->
+  <script>
+      widthscrencan = window.innerWidth > 0 ? window.innerWidth : screen.width; // capture width screen onload
+
+      const mobileScreenLimit = 400;
+      const mobileImageHeight = 600; // default is mobile height
+      const mobileImageStep = 100; // default is mobile height
+      const desktopImageHeight = 160; // default is mobile height
+
+      var canvas = new fabric.Canvas("canvas");
+      function resizeCanvas() {
+        const outerCanvasContainer = $(".fabric-canvas-wrapper")[0];
+
+        const ratio = canvas.getHeight() / canvas.getWidth();
+        const containerWidth = outerCanvasContainer.clientWidth;
+        const containerHeight = outerCanvasContainer.clientHeight;
+        const scale = containerWidth / canvas.getWidth();
+        const zoom = canvas.getZoom() * scale;
+
+        // Mobile unchanged
+        if (widthscrencan <= mobileScreenLimit) {
+          canvas.setDimensions({
+            width: containerWidth,
+            height: containerHeight 
+          });
+
+          // Scale desktop
+        } else {
+          canvas.setDimensions({
+            width: containerWidth,
+            height: containerWidth * ratio
+          });
+        }
+        canvas.setViewportTransform([zoom, 0, 0, zoom, 0, 0]);
+      }
+      $(window).resize(resizeCanvas);
+
+      var imageUrlSet = [
+        // ROW 2
+        [
+          "images/peter.jpg",
+          "images/candle.jpg",
+          "images/currency.jpg",
+          "images/test.png"
+        ],
+        [
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png"
+        ],
+        [
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png"
+        ],
+        [
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png"
+        ],
+        // ROW 1
+        [
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png"
+        ],
+        [
+          "images/test.png",
+          "images/test.png",
+          "images/test.png"
+        ],
+        [
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png"
+        ],
+        [
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+        ],
+        // ROW 3
+        [
+          "images/test.png",
+          "images/test.png",
+          "images/test.png"
+        ],
+        [
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png",
+          "images/test.png"
+        ],
+        [
+          "images/test.png",
+          "images/test.png",
+          "images/test.png"
+        ]
+      ];
+
+      // SET UP POSITIONS
+      // If user is on mobile, only select one random stack from each row
+      if (widthscrencan <= mobileScreenLimit) {
+        
+        // Change reset button text to "randomize"
+        $('#reset-text').html('randomize');
+        
+        // Update image set to random three sets
+        var mobileRandomSet = [];
+        mobileRandomSet.push(imageUrlSet[Math.floor(Math.random() * 3) + 0]);
+        mobileRandomSet.push(imageUrlSet[Math.floor(Math.random() * 3) + 4]);
+        mobileRandomSet.push(imageUrlSet[Math.floor(Math.random() * 2) + 8]);
+        imageUrlSet = mobileRandomSet;
+
+        // Define the three stacks' positions
+        const initialXPos = 100,
+          initialYPos = 320,
+          imageStep = mobileImageHeight + mobileImageStep;
+
+        var positions = [
+          [initialXPos, initialYPos], 
+          [initialXPos, initialYPos + imageStep * 1], 
+          [initialXPos, initialYPos + imageStep * 2], 
+        ];
+        
+      // If user on desktop, display stacks in three rows
+      } else {
+        var hcw = canvas.getWidth() / 2;
+        var hch = canvas.getHeight() / 2 - desktopImageHeight / 2 - 40;
+        const heightRelativeDistanceScale = desktopImageHeight * 1.3;
+        var positions = [
+          // ROW 2
+          [hcw - 640, hch], // Cypress
+          [hcw - 435, hch], // To Nefos
+          [hcw - 140, hch], // Secret Societies
+          [hcw + 165, hch], // ViaNorthPoint
+          // ROW 1
+          [hcw - 620, hch - heightRelativeDistanceScale], // Piscina
+          [hcw - 400, hch - heightRelativeDistanceScale], // Mexico
+          [hcw - 75, hch - heightRelativeDistanceScale], // UK Rail Stations
+          [hcw + 240, hch - heightRelativeDistanceScale], // Taiwan Light Fest
+          // ROW 3
+          [hcw - 520, hch + heightRelativeDistanceScale], // Golf 
+          [hcw - 210, hch + heightRelativeDistanceScale], // Poldra
+          [hcw + 0, hch + heightRelativeDistanceScale] // Geneva
+        ];
+      }
+
+      // Apply image filters
+      var inactiveOpaValue = 0.4;
+      var filter = new fabric.Image.filters.Grayscale();
+
+      // Display images
+      var prevActiveImg, i, j;
+      for (i = 0; i < imageUrlSet.length; i++) {
+        var currentSet = imageUrlSet[i];
+        
+        for (j = 0; j < currentSet.length; j++) {
+          var imgInstance = new fabric.Image.fromURL(
+            currentSet[j],
+            function(oImg) {
+              // Default image should be transparent, gray
+              oImg.set({
+                opacity: inactiveOpaValue
+              });
+
+              oImg.filters.push(filter);
+              oImg.applyFilters();
+
+              var imgHeight;
+              if (widthscrencan > mobileScreenLimit) {
+                imgHeight = desktopImageHeight;
+              } else {
+                imgHeight = mobileImageHeight;
+              }
+
+              oImg.scaleToHeight(imgHeight);
+              canvas.add(oImg);
+
+              // When the image is clicked:
+              // 1) remove image filter, show color
+              // 2) revert prev-clicked image to grayscale
+              oImg.on("mousedown", function(e) {
+                // 1)
+                if (oImg.filters) {
+                  oImg.filters = [];
+                  oImg.applyFilters();
+                }
+
+                oImg.set({
+                  opacity: 1
+                });
+
+                //  2)
+                if (prevActiveImg !== oImg) {
+                  if (prevActiveImg) {
+                    prevActiveImg.filters.push(filter);
+                    prevActiveImg.applyFilters();
+                    prevActiveImg.set({
+                      opacity: inactiveOpaValue
+                    });
+                  }
+
+                  prevActiveImg = oImg;
+                }
+              });
+            },
+            { left: positions[i][0] + j * 5, top: positions[i][1] - j * 2 }
+          );
+        }
+      }
+
+      resizeCanvas();
+  </script>
+
+   
+
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+
+
+
+</html>
